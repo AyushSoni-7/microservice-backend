@@ -11,7 +11,7 @@ class ProductCategoryMap(Resource):
                         )
 
     parser.add_argument('product_id',
-                        type=int,
+                        type=str,
                         required=False,
                         help="Product id."
                         )
@@ -22,7 +22,7 @@ class ProductCategoryMap(Resource):
         try:
             pcMap.save()
         except Exception:
-            return {"message": "An error occurred"}, 500
+            return {"message": "An error occurred in post map"}, 500
         return pcMap.json(), 201
 
     def delete(self):

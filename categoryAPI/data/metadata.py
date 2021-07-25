@@ -47,21 +47,21 @@ ProductCategoryData = [
     {
         'id': 1,
         'category_id': 1,
-        'product_id': 1
+        'product_id': "60fd970e4d004fa5512c2e94"
     },
     {
         'id': 2,
         'category_id': 1,
-        'product_id': 2
+        'product_id': "60fd972f4d004fa5512c2e95"
     },
     {
         'id': 3,
         'category_id': 1,
-        'product_id': 3
+        'product_id': "60fd972f4d004fa5512c2e96"
     },
     {
         'id': 4,
         'category_id': 2,
-        'product_id': 1
+        'product_id': "60fd972f4d004fa5512c2e95"
     }
 ]

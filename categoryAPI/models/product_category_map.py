@@ -5,9 +5,9 @@ class ProductCategoryMap(db.Model):
     __tablename__ = 'product_category_map'
     id = db.Column(db.Integer, primary_key=True)
     category_id = db.Column(db.Integer, db.ForeignKey('category.id'))
-    product_id = db.Column(db.Integer, unique=True)
+    product_id = db.Column(db.String(), unique=True)
 
-    def __init__(self, category_id: int, product_id: int):
+    def __init__(self, category_id: int, product_id: str):
         self.category_id = category_id
         self.product_id = product_id
 
