@@ -4,7 +4,7 @@ from flask_cors import CORS
 from flask_restful import Api
 from db import db
 from resources import ROUTES_MAP
-from config import DevelopmentConfig
+from config.config import DevelopmentConfig
 from data.insert_metadata import insert_metadata
 
 

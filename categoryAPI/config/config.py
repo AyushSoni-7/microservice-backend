@@ -12,11 +12,12 @@ class Config(object):
     POSTGRES_PORT = os.environ.get('POSTGRES_PORT', '5432')
     POSTGRES_URI = (
         "postgresql://" + POSTGRES_USER + ":" +
-        POSTGRES_PASSWORD + "@" + POSTGRES_HOST + POSTGRES_PORT
+        POSTGRES_PASSWORD + "@" + POSTGRES_HOST + ":" + POSTGRES_PORT
         )
-    SQLALCHEMY_DATABASE_URI = os.environ.get(
-        'POSTGRES_HOST', 'sqlite:///data.db'
-        )
+    # SQLALCHEMY_DATABASE_URI = os.environ.get(
+    #     'POSTGRES_HOST', 'sqlite:///data.db'
+    #     )
+    SQLALCHEMY_DATABASE_URI = POSTGRES_URI
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     PROPAGATE_EXCEPTIONS = True
 
