@@ -32,7 +32,6 @@ class Categories(Resource):
     def post(self):
         data = self.parser.parse_args()
         category = Category(**data)
-        category.save()
         try:
             category.save()
         except Exception:
