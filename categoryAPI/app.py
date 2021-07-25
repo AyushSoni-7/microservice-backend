@@ -21,7 +21,7 @@ def create_app():
 
 
 if __name__ == "__main__":
-    port = os.environ.get("port")
+    port = os.environ.get("port", 5000)
     app = create_app()
 
     @app.before_first_request
