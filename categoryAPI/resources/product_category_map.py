@@ -24,11 +24,3 @@ class ProductCategoryMap(Resource):
         except Exception:
             return {"message": "An error occurred in post map"}, 500
         return pcMap.json(), 201
-
-    def delete(self):
-        data = self.parser.parse_args()
-        pcMap = pcModel.get(data['product_id'])
-        if pcMap:
-            pcMap.delete()
-            return {'message': 'Map Deleted'}
-        return {'message': 'Mapping Not Found'}, 404

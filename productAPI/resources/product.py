@@ -1,6 +1,7 @@
 from flask_restful import Resource, reqparse
 from models.product import Product
 from bson.objectid import ObjectId
+import json
 
 
 class Products(Resource):
@@ -19,6 +20,11 @@ class Products(Resource):
                         type=str,
                         required=True,
                         help="Source URL of the product image"
+                        )
+    parser.add_argument('price',
+                        type=float,
+                        required=True,
+                        help="Price of the product"
                         )
     parser.add_argument('quantity',
                         type=float,
@@ -86,6 +92,11 @@ class EditProduct(Resource):
                         required=True,
                         help="Source URL of the product image"
                         )
+    parser.add_argument('price',
+                        type=float,
+                        required=True,
+                        help="Price of the product"
+                        )
     parser.add_argument('quantity',
                         type=float,
                         required=True,
@@ -105,9 +116,13 @@ class EditProduct(Resource):
         data['id'] = ObjectId(data['id'])
         product = Product(**data)
         product.updateProduct()
+        return product.json()
 
 
 class GetProduct(Resource):
     def get(self, product_id: int):
         product = Product.getProduct(product_id)
-        return product.json(), 200
+        retVal = json.loads(product.json())
+        retVal['id'] = str(product['id'])
+        del retVal['_id']
+        return retVal, 200

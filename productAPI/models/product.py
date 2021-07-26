@@ -10,10 +10,10 @@ class Product(db.Document):
     name = db.StringField(max_length=64, unique=True, required=True)
     description = db.StringField(required=True)
     img_src = db.StringField(required=True)
+    price = db.DecimalField(required=True)
     quantity = db.DecimalField(required=True)
     benefits = db.StringField(required=True)
     harm = db.StringField(required=True)
-
     # def __init__(
     #             self, name: str, description: str,
     #             img_src: str, quantity: float,
@@ -49,12 +49,11 @@ class Product(db.Document):
 
     @classmethod
     def getProduct(cls, product_id) -> 'Product':
-        print(ObjectId(product_id))
         return cls.objects(id=ObjectId(product_id)).first()
 
     def addProduct(self, category_id):
         if(Product.objects(name=self.name)):
-            abort(404, 'Product plready exist')
+            abort(404, 'Product already exist')
         URL = os.environ.get('category_url', 'http://127.0.0.1:5000')
         URL += "/map"
         data = {
@@ -88,5 +87,24 @@ class Product(db.Document):
         self.save()
 
     def deleteProduct(self):
+        URL = os.environ.get('category_url', 'http://127.0.0.1:5000')
+        URL += "/products/" + str(self.id)
         # delete the product entry from customer database
+        try:
+            response = requests.delete(url=URL)
+            response.raise_for_status()
+        except requests.exceptions.HTTPError as errh:
+            print(errh)
+            raise errh
+        except requests.exceptions.ConnectionError as errc:
+            print(errc)
+            raise errc
+        except requests.exceptions.Timeout as errt:
+            print(errt)
+            raise errt
+        except requests.exceptions.RequestException as err:
+            print(err)
+            raise err
+        except Exception as e:
+            raise e
         self.delete()

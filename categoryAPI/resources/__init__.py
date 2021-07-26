@@ -7,5 +7,5 @@ ROUTES_MAP = [
   {"route": "/<int:category_id>", "resource": Category},
   {"route": "/", "resource": Categories},
   {"route": "/map", "resource": ProductCategoryMap},
-  {"route": "/products/<int:category_id>", "resource": Products}
+  {"route": "/products/<string:_id>", "resource": Products}
 ]
